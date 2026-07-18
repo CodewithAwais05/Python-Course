@@ -84,7 +84,7 @@ A complete roadmap covering Python fundamentals to Object-Oriented Programming, 
 | 1 | Variables & Data Types | ✅ Completed |
 | 2 | Strings & Conditional Statements | ✅ Completed |
 | 3 | Lists & Tuples | ✅ Completed |
-| 4 | Dictionary & Sets | ⬜ Not started |
+| 4 | Dictionary & Sets | ✅ Completed |
 | 5 | Loops in Python | ⬜ Not started |
 | 6 | Functions & Recursion | ⬜ Not started |
 | 7 | File Input/Output | ⬜ Not started |
