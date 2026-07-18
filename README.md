@@ -1,4 +1,4 @@
-# Python Full Course — Chapter Guide
+# Python Full Course 
 
 A complete roadmap covering Python fundamentals to Object-Oriented Programming, organized chapter-wise.
 
