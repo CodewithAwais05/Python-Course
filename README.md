@@ -86,7 +86,7 @@ A complete roadmap covering Python fundamentals to Object-Oriented Programming, 
 | 3 | Lists & Tuples | ✅ Completed |
 | 4 | Dictionary & Sets | ✅ Completed |
 | 5 | Loops in Python | ✅ Completed |
-| 6 | Functions & Recursion | ⬜ Not started |
+| 6 | Functions & Recursion | ✅ Completed |
 | 7 | File Input/Output | ⬜ Not started |
 | 8 | OOPS Part 1 | ⬜ Not started |
 | 9 | OOPS Part 2 | ⬜ Not started |
