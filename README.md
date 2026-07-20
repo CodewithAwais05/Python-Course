@@ -66,8 +66,6 @@ A complete roadmap covering Python fundamentals to Object-Oriented Programming, 
 - Instance attributes and methods
 - The `self` keyword explained
 - Difference between class-level and instance-level data
-
-## Chapter 9: OOPS — Object Oriented Programming (Part 2)
 - Inheritance and creating subclasses
 - Method overriding
 - Encapsulation and access modifiers (public, protected, private conventions)
