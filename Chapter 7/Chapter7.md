@@ -1,163 +1,103 @@
-# Chapter 7: File Input/Output in Python
+# Chapter 7: File I/O in Python
 
-A complete guide to reading from and writing to files in Python.
+## 📋 Overview
+This chapter explains how Python interacts with files on disk — opening, reading, writing, and deleting them — along with the safer `with` syntax that handles closing files automatically.
+
+## 🎯 Learning Objectives
+By the end of this chapter, you will be able to:
+- Distinguish between text files and binary files
+- Open a file in different modes
+- Read data from a file (entire content or line-by-line)
+- Write and append data to a file
+- Use the `with` statement for safe file handling
+- Delete a file using the `os` module
 
 ---
 
-## 📖 Overview
-File I/O (Input/Output) allows a program to:
-- **Read** data from external files
-- **Write** or **append** data to files
-- Store data permanently, beyond the program's runtime
+## 📚 Topics Covered
 
----
+### 1. File I/O in Python
+Python can be used to perform operations on a file (read & write data).
 
-## 📂 Opening & Closing Files
-
-### The `open()` Function
-```python
-file = open("data.txt", "r")   # open in read mode
-# ... work with the file ...
-file.close()                   # always close when done
-```
-
-### File Modes
-| Mode | Meaning |
+**Types of Files**
+| Type | Examples |
 |---|---|
-| `"r"` | Read (default) — file must exist |
-| `"w"` | Write — creates file if missing, **overwrites** existing content |
-| `"a"` | Append — creates file if missing, adds to end without erasing |
-| `"r+"` | Read and write |
-| `"rb"` / `"wb"` | Read/write in binary mode (for non-text files) |
+| Text Files | `.txt`, `.docx`, `.log`, etc. |
+| Binary Files | `.mp4`, `.mov`, `.png`, `.jpeg`, etc. |
 
-### Why Closing Matters
-- Frees system resources.
-- Ensures all written data is properly saved (flushed) to disk.
-- Forgetting to close can cause data loss or file-locking issues.
+### 2. Open, Read & Close a File
+A file must be opened before it can be read or written.
 
----
+```python
+f = open("file_name", "mode")
 
-## 📖 Reading Files
+# e.g.
+f = open("sample.txt", "r")
 
-### Reading Methods
-| Method | Description |
+data = f.read()
+f.close()
+```
+
+**File Modes**
+| Character | Meaning |
 |---|---|
-| `.read()` | reads the entire file as a single string |
-| `.read(n)` | reads the first `n` characters |
-| `.readline()` | reads a single line at a time |
-| `.readlines()` | reads all lines into a list of strings |
+| `'r'` | Open for reading (default) |
+| `'w'` | Open for writing, truncating the file first |
+| `'x'` | Create a new file and open it for writing |
+| `'a'` | Open for writing, appending to the end if the file exists |
+| `'b'` | Binary mode |
+| `'t'` | Text mode (default) |
+| `'+'` | Open for updating (reading and writing) |
 
+### 3. Reading a File
 ```python
-file = open("data.txt", "r")
-content = file.read()
-print(content)
-file.close()
+data = f.read()       # reads the entire file
+data = f.readline()    # reads one line at a time
 ```
 
-### Looping Through a File Line by Line
+### 4. Writing to a File
 ```python
-file = open("data.txt", "r")
-for line in file:
-    print(line.strip())   # strip() removes trailing newline
-file.close()
+f = open("demo.txt", "w")
+f.write("this is a new line")   # overwrites the entire file
+
+f = open("demo.txt", "a")
+f.write("this is a new line")   # adds to the end of the file
 ```
 
----
-
-## ✍️ Writing & Appending
-
-### Writing (overwrites existing content)
-```python
-file = open("data.txt", "w")
-file.write("Hello, World!\n")
-file.close()
-```
-
-### Appending (adds without erasing)
-```python
-file = open("data.txt", "a")
-file.write("New line added.\n")
-file.close()
-```
-
-### Writing Multiple Lines
-```python
-lines = ["Line 1\n", "Line 2\n", "Line 3\n"]
-file = open("data.txt", "w")
-file.writelines(lines)
-file.close()
-```
-
----
-
-## 🛡️ Using `with` Statement (Best Practice)
+### 5. `with` Syntax
+Automatically closes the file once the block finishes executing — a safer alternative to manual `open()`/`close()`.
 
 ```python
-with open("data.txt", "r") as file:
-    content = file.read()
-    print(content)
-# file is automatically closed here, even if an error occurs
+with open("demo.txt", "a") as f:
+    data = f.read()
 ```
 
-### Why Use `with`?
-- Automatically handles closing the file — no need to call `.close()` manually.
-- Safer: closes the file even if an exception occurs during processing.
-- Cleaner and more Pythonic than manual open/close.
-
----
-
-## 🗂️ Working with File Paths
-- **Relative path:** `"data.txt"` — relative to the current working directory.
-- **Absolute path:** `"C:/Users/Name/Documents/data.txt"` — full path from root.
-- Use `os.path` or `pathlib` for more robust, cross-platform path handling.
-
-```python
-import os
-print(os.path.exists("data.txt"))   # check if file exists
-```
-
----
-
-## 🗑️ Deleting a File (using the `os` module)
-
-- A **module** is like a code library — a file written by another programmer that generally has functions we can use.
-- To delete a file, Python doesn't have a built-in keyword — instead, we use the `os` module.
+### 6. Deleting a File
+Requires the `os` module — a file (like a code library) written by another programmer that provides reusable functions.
 
 ```python
 import os
 os.remove(filename)
 ```
 
-### Key Points
-- `os.remove(filename)` permanently deletes the specified file from disk.
-- The file must exist, otherwise Python raises a `FileNotFoundError`.
-- Good practice: check if the file exists first using `os.path.exists()` before removing it, to avoid errors.
+---
 
-```python
-import os
-
-if os.path.exists("data.txt"):
-    os.remove("data.txt")
-else:
-    print("File does not exist.")
-```
+## 💻 Practice Exercises
+1. Create a new file `"practice.txt"` using Python. Add the following data to it:
+   ```
+   Hi everyone
+   we are learning File I/O
+   using Java.
+   I like programming in Java.
+   ```
+2. Write a program to replace all occurrences of `"java"` with `"python"` in the file above.
+3. Write a program to search whether the word `"learning"` exists in the file.
+4. Write a program to find in which line of the file the word `"learning"` first occurs. Print `-1` if the word is not found.
+5. From a file containing numbers separated by commas, print the count of even numbers.
 
 ---
 
-## 📊 Read vs Write vs Append — Quick Comparison
-| Mode | Creates file if missing? | Erases existing content? | Cursor position |
-|---|---|---|---|
-| `r` | No (error if missing) | No | start |
-| `w` | Yes | Yes | start |
-| `a` | Yes | No | end |
-
----
-
-## ✅ Chapter Checklist
-- [ ] Open a file in read, write, and append modes
-- [ ] Use `.read()`, `.readline()`, `.readlines()`
-- [ ] Write and append text to a file
-- [ ] Loop through a file line by line
-- [ ] Use the `with` statement for safe file handling
-- [ ] Check file existence using `os.path`
-- [ ] Delete a file using `os.remove()`
+## 🔑 Key Takeaways
+- Always close a file after use — or better, use the `with` statement so it closes automatically.
+- `'w'` mode overwrites file content; `'a'` mode appends to it.
+- The `os` module provides system-level operations like file deletion.
