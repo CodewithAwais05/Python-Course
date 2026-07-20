@@ -1,136 +1,95 @@
-# Chapter 6: Functions & Recursion in Python
+# Chapter 6: Functions & Recursion
 
-A complete guide to writing reusable code blocks and solving problems recursively.
+## 📋 Overview
+This chapter covers how to define and use **functions** in Python — reusable blocks of code that perform a specific task — along with **default parameters** and **recursion**, where a function calls itself to solve a problem.
+
+## 🎯 Learning Objectives
+By the end of this chapter, you will be able to:
+- Define and call user-defined functions
+- Differentiate between built-in and user-defined functions
+- Use default parameter values
+- Understand and write recursive functions with proper base cases
 
 ---
 
-## 📖 Overview
-This chapter covers:
-- **Functions** — reusable blocks of code that perform a specific task
-- **Recursion** — a function calling itself to solve smaller sub-problems
+## 📚 Topics Covered
 
----
+### 1. Functions in Python
+A function is a block of statements that performs a specific task.
 
-## 🧩 Functions
-
-### Defining & Calling a Function
 ```python
-def greet():
-    print("Hello!")
+def func_name(param1, param2..):     # Function Definition
+    # some work
+    return val
 
-greet()   # calling the function
+func_name(arg1, arg2..)              # function call
 ```
 
-### Parameters & Arguments
+**Example**
 ```python
-def greet(name):
-    print(f"Hello, {name}!")
+def sum(a, b):
+    s = a + b
+    return s
 
-greet("Ali")   # "Ali" is the argument passed to parameter "name"
+print(sum(2, 3))    # 5
 ```
 
-### Default Parameter Values
+### 2. Built-in vs. User-Defined Functions
+| Built-in Functions | User-Defined Functions |
+|---|---|
+| `print()`, `len()`, `type()`, `range()` | Functions you write yourself, e.g. `sum()` |
+
+### 3. Default Parameters
+Assigns a default value to a parameter, which is used when no argument is passed for it.
+
 ```python
 def greet(name="Guest"):
-    print(f"Hello, {name}!")
+    print("Hello", name)
 
-greet()          # Hello, Guest!
-greet("Sara")    # Hello, Sara!
-```
-
-### Return Values
-```python
-def add(a, b):
-    return a + b
-
-result = add(3, 4)   # result = 7
-```
-- `return` sends a value back to the caller and **ends the function**.
-- `print()` just displays output — it doesn't give the function a usable value.
-
-### Types of Arguments
-| Type | Example | Description |
-|---|---|---|
-| Positional | `add(3, 4)` | matched by order |
-| Keyword | `add(a=3, b=4)` | matched by name |
-| Default | `def greet(name="Guest")` | used if no value is passed |
-| Variable-length (`*args`) | `def total(*nums)` | accepts any number of positional args |
-| Variable-length (`**kwargs`) | `def info(**data)` | accepts any number of keyword args |
-
-```python
-def total(*nums):
-    return sum(nums)
-
-total(1, 2, 3, 4)   # 10
-```
-
-### Variable Scope
-- **Local variable:** defined inside a function, accessible only within it.
-- **Global variable:** defined outside all functions, accessible everywhere.
-- Use the `global` keyword to modify a global variable from inside a function.
-
-```python
-x = 10   # global
-
-def show():
-    x = 5   # local, different from global x
-    print(x)
-
-show()       # 5
-print(x)     # 10
+greet()          # Hello Guest
+greet("Karan")   # Hello Karan
 ```
 
 ---
 
-## 🔁 Recursion
+### 4. Recursion
+When a function calls itself repeatedly, with a **base case** to stop the recursion.
 
-### What is Recursion?
-- A function that calls **itself** to break a problem into smaller sub-problems.
-- Every recursive function needs:
-  1. **Base case** — the condition that stops the recursion.
-  2. **Recursive case** — where the function calls itself with a smaller input.
-
-### Example — Factorial
+**Example — Print `n` to 1 backwards**
 ```python
-def factorial(n):
-    if n == 0:          # base case
+def show(n):
+    if n == 0:            # base case
+        return
+    print(n)
+    show(n - 1)
+```
+
+**Example — Factorial (`n!`)**
+```python
+def fact(n):
+    if n == 0 or n == 1:
         return 1
-    return n * factorial(n - 1)   # recursive case
-
-print(factorial(5))   # 120
+    else:
+        return n * fact(n - 1)
 ```
-
-### Example — Fibonacci
-```python
-def fibonacci(n):
-    if n <= 1:           # base case
-        return n
-    return fibonacci(n - 1) + fibonacci(n - 2)
-```
-
-### Key Points
-- Without a proper base case, recursion leads to **infinite calls** and a `RecursionError`.
-- Each recursive call is added to the **call stack** until the base case is reached.
-- Recursion is elegant for problems with a naturally repeating structure (factorials, Fibonacci, tree/graph traversal).
 
 ---
 
-## 📊 Iterative vs Recursive — Quick Comparison
-| Feature | Iterative (loops) | Recursive |
-|---|---|---|
-| Uses | loops (`for`/`while`) | function calling itself |
-| Memory usage | lower | higher (call stack) |
-| Readability | can get complex for nested problems | often cleaner for repetitive/tree-like problems |
-| Risk | infinite loop | infinite recursion / stack overflow |
-| Base requirement | loop condition | base case |
+## 💻 Practice Exercises
+
+### Functions
+1. WAF (Write a Function) to print the length of a list. (`list` is the parameter)
+2. WAF to print the elements of a list in a single line. (`list` is the parameter)
+3. WAF to find the factorial of `n`. (`n` is the parameter)
+4. WAF to convert USD to INR.
+
+### Recursion
+5. Write a recursive function to calculate the sum of the first `n` natural numbers.
+6. Write a recursive function to print all elements in a list. (Hint: use `list` and `index` as parameters.)
 
 ---
 
-## ✅ Chapter Checklist
-- [ ] Define and call functions with parameters
-- [ ] Use default parameter values
-- [ ] Understand `return` vs `print()`
-- [ ] Use `*args` and `**kwargs`
-- [ ] Understand local vs global scope
-- [ ] Write a recursive function with a proper base case
-- [ ] Trace recursive calls (factorial/Fibonacci) step by step
+## 🔑 Key Takeaways
+- Functions promote code reuse and modularity — define once, call many times.
+- Default parameters make function calls flexible when arguments are optional.
+- Every recursive function **must** have a base case, or it will run indefinitely and cause a stack overflow.
